@@ -1,0 +1,17 @@
+# Handle all files detected as text and force them to CRLF on checkout
+* text eol=crlf
+
+# Ensure binary files are not modified
+*.OBJ binary
+*.obj binary
+*.EXE binary
+*.exe binary
+*.COM binary
+*.com binary
+*.LIB binary
+*.lib binary
+*.7z binary
+*.DLL binary
+*.dll binary
+*.OVL binary
+*.ovl binary
