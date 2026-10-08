@@ -1,1 +1,1 @@
-..\bin\make -f library.msx
+..\bin\make -B -f library.msx

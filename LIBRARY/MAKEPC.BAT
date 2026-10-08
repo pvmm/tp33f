@@ -1,1 +1,1 @@
-..\bin\make -flibrary.pc
+..\bin\make -B -f library.pc
