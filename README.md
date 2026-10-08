@@ -30,14 +30,16 @@ For more info and a complete manual see:
 
 ## Building
 
-Open `./dosbox.sh`, then in `TURBO/` run one of:
+Open `./dosbox.sh`, then in `LIBRARY/` run one of:
+- `MAKEMSX.BAT` - `make -f library.msx`, converts `FILEIO.MAC` and assembles `LIBRARY/MSX_OBJ/FILEIO.OBJ`;
+- `MAKEPC.BAT` - `make -f library.pc`, converts `FILEIO.MAC` and assembles `LIBRARY/PC_OBJ/FILEIO.OBJ`.
+
+The shared runtime file-I/O library is built from `LIBRARY/` and is needed for `TURBO.COM` compilation.
+
+Then go to `TURBO/` and run one of:
 - `COMP.BAT` - compile the Pascal sources (`LONG.PAS`, `DIV32.PAS`, ...) with the PC cross-compiler `TP3.EXE`;
 - `MAKEMSX.BAT` - `make -f turbo.msx`, builds `RUNTIME.COM` + `TURBO.COM` for MSX;
 - `MAKEPC.BAT` - `make -f turbo.pc`, builds `TP3.EXE` for DOS (requires `TURBO.PC`, kept only in `TURBO.7z`).
-
-The shared runtime file-I/O library is built from `LIBRARY/` (before `TURBO.COM`, whose link list in `TURBO/LINK.MSX` needs `LIBRARY/MSX_OBJ/FILEIO.OBJ`):
-- `MAKEMSX.BAT` - `make -f library.msx`, converts `FILEIO.MAC` and assembles `LIBRARY/MSX_OBJ/FILEIO.OBJ`;
-- `MAKEPC.BAT` - `make -f library.pc`, converts `FILEIO.MAC` and assembles `LIBRARY/PC_OBJ/FILEIO.OBJ`.
 
 Run `MAKEMSX.BAT` or `MAKEPC.BAT` in `LIBRARY/` to produce the `FILEIO.OBJ` needed by `TURBO.COM`.
 
@@ -54,4 +56,4 @@ The `z80` binary is just Frits Hilderink's "2pc" converter (v1.6) under a differ
 
 The MSX link is driven by `TURBO/MSX_OBJ/` targets: `RTL_RTL.OBJ` + `LIBRARY/MSX_OBJ/FILEIO.OBJ` + `RTL_END.OBJ` link into `RUNTIME.COM`, and `TUR_INIT/TUR_COMP/TUR_SLIB/TUR_GLIB/TUR_END` link into `TURBO.COM` (object list in `TURBO/LINK.MSX`). `LIBCONST.INC` is regenerated from `RUNTIME.MAP` by `TURBO/EXTERN.EXE` (source in `TURBO/EXTERN.C`) via the `libconst.inc : runtime.com` rule in the Makefile.
 
-**Note:** the `z80` binary is NOT included in this repository, but it is simply the 2pc tool under another name. Its source lives in [fhil/2pc](https://github.com/fhil/2pc) ("create 2pc.exe", v1.6 by F. Hilderink). Build `2pc.exe` (see the `vsc2022` project) and install it as `2pc\z80.exe` - i.e. the same binary (renamed) - in a `2pc` folder next to this repo, since the Make files call `..\2pc\z80`. The `TURBO/MSX_GEN/*.MC`, `TURBO/PC_GEN/*.ASM` and `LIBRARY/*_ASM/FILEIO.ASM` files in this repo are its checked-in outputs; without it only the pre-generated files in the `MSX_GEN`/`PC_GEN`/`*_OBJ` folders can be used.
+**Note:** the `z80` binary is included in this repository as `2PC/Z80.EXE` (together with `2PC/CWSDPMI.EXE` for DPMI) — it is simply the 2pc tool (v1.6, by F. Hilderink) under another name, and the Make files call it as `..\2pc\z80`, which resolves into the `2PC/` folder here. Its source lives in [fhil/2pc](https://github.com/fhil/2pc) ("create 2pc.exe", v1.6 by F. Hilderink), and a from-source rebuild for MS-DOS (DJGPP) is maintained in the companion `2pc` repository. The `TURBO/MSX_GEN/*.MC`, `TURBO/PC_GEN/*.ASM` and `LIBRARY/*_ASM/FILEIO.ASM` files in this repo are its checked-in outputs.
