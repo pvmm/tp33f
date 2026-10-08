@@ -35,6 +35,12 @@ Open `./dosbox.sh`, then in `TURBO/` run one of:
 - `MAKEMSX.BAT` - `make -f turbo.msx`, builds `RUNTIME.COM` + `TURBO.COM` for MSX;
 - `MAKEPC.BAT` - `make -f turbo.pc`, builds `TP3.EXE` for DOS (requires `TURBO.PC`, kept only in `TURBO.7z`).
 
+The shared runtime file-I/O library is built from `LIBRARY/` (before `TURBO.COM`, whose link list in `TURBO/LINK.MSX` needs `LIBRARY/MSX_OBJ/FILEIO.OBJ`):
+- `MAKEMSX.BAT` - `make -f library.msx`, converts `FILEIO.MAC` and assembles `LIBRARY/MSX_OBJ/FILEIO.OBJ`;
+- `MAKEPC.BAT` - `make -f library.pc`, converts `FILEIO.MAC` and assembles `LIBRARY/PC_OBJ/FILEIO.OBJ`.
+
+Run `MAKEMSX.BAT` or `MAKEPC.BAT` in `LIBRARY/` to produce the `FILEIO.OBJ` needed by `TURBO.COM`.
+
 ## The `z80` converter and the `.mac` / `.mc` sources
 
 Each module is written once as a Z80-oriented master source with a `.mac` extension: `TURBO/COMPILER.MAC`, `TURBO/RUNTIME.MAC`, `TURBO/INIT.MAC`, `TURBO/SLIB.MAC`, `TURBO/GLIB.MAC`, `TURBO/END.MAC` and `LIBRARY/FILEIO.MAC`. They cover both targets through `IFDEF MSX` / `IFDEF MAKEPC`, and lines that only make sense for the *other* target are written as comments prefixed with `;!`.
