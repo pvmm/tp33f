@@ -45,7 +45,7 @@ Run `MAKEMSX.BAT` or `MAKEPC.BAT` in `LIBRARY/` to produce the `FILEIO.OBJ` need
 
 ## The `z80` converter and the `.mac` / `.mc` sources
 
-Each module is written once as a Z80-oriented master source with a `.mac` extension: `TURBO/COMPILER.MAC`, `TURBO/RUNTIME.MAC`, `TURBO/INIT.MAC`, `TURBO/SLIB.MAC`, `TURBO/GLIB.MAC`, `TURBO/END.MAC` and `LIBRARY/FILEIO.MAC`. They cover both targets through `IFDEF MSX` / `IFDEF MAKEPC`, and lines that only make sense for the *other* target are written as comments prefixed with `;!`.
+Each module is written once as a Z80-oriented master source with a `.mac` extension: `TURBO/COMPILER.MAC`, `TURBO/RUNTIME.MAC`, `TURBO/INIT.MAC`, `TURBO/SLIB.MAC`, `TURBO/GLIB.MAC`, `TURBO/END.MAC` and `LIBRARY/FILEIO.MAC`. They cover both targets through `IFDEF MSX` / `IFDEF MAKEPC`, and lines that only make sense for the *other* target are written as comments prefixed with `;!`. `TURBO/GLIB.MAC` holds all the GIOS (graphical library) function signatures.
 
 The `z80` binary is just Frits Hilderink's "2pc" converter (v1.6) under a different name; the Make files invoke it as `z80`, but it is the same 2pc program. It rewrites each `.mac` into one target-specific assembly file:
 
